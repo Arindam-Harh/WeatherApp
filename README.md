@@ -1,4 +1,4 @@
 # WeatherApp
-<bold>A basic weather app.</bold>
+<h3>A basic weather app.</h3>
 <br>
 Author - Anonymous
