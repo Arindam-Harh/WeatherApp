@@ -1,20 +1,23 @@
 import { useState } from "react";
+import { Modal } from "../components/Modal.jsx";
+// const API_KEY = `bfd3d0b5ded135b477ad7c473a4ae359`;
+// const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`;
 
+// const url = `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`;
 export const App = () => {
-  // const API_KEY = `bfd3d0b5ded135b477ad7c473a4ae359`;
-  // const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`;
-
-  // const url = `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`;
   const [city, setCity] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
   const getCityName = (e) => {
     e.preventDefault();
-    if(city.trim() === "") {
-      alert('Please Enter a Valid City Name.');
+    if (city.trim() === "") {
+      // alert('Please Enter a Valid City Name.');
+      setShowModal(true);
       return;
     }
     console.log(city);
     setCity("");
-  }
+  };
   return (
     <>
       <div className="main">
@@ -22,6 +25,11 @@ export const App = () => {
           <h1>Weather in Your City</h1>
         </header>
         <section className="body">
+          {showModal && (
+            <div className="overlay">
+              <Modal onClose={() => setShowModal(false)} />
+            </div>
+          )}
           <form onSubmit={getCityName} className="city_search">
             <input
               type="text"
@@ -31,7 +39,9 @@ export const App = () => {
               onChange={(e) => setCity(e.target.value)}
               placeholder="Search your city ... "
             />
-            <button type="submit" className="btn_search">Search</button>
+            <button type="submit" className="btn_search">
+              Search
+            </button>
           </form>
           <div className="temp">
             <h2 className="temperature">temperature</h2>
