@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../components/Modal.jsx";
+import { FaWind } from "react-icons/fa";
+import { WiHumidity } from "react-icons/wi";
+import { FaTemperatureHigh } from "react-icons/fa";
+import { FaTachometerAlt } from "react-icons/fa";
+import { FaRegClock } from "react-icons/fa";
+import { CiCalendarDate } from "react-icons/ci";
 
 const API_KEY = `bfd3d0b5ded135b477ad7c473a4ae359`;
 const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`;
@@ -92,10 +98,10 @@ export const App = () => {
             <h2 className="date">{date.toLocaleDateString()}</h2>
           </div>
           <div className="weather_data">
-            <section className="wdata wind_speed">{weather?.wind?.speed}  m/s</section>
-            <section className="wdata feels_like">{weather?.main?.feels_like} &deg;C</section>
-            <section className="wdata humidity">{weather?.main?.humidity} %</section>
-            <section className="wdata preception">{weather?.main?.pressure} hPa</section>
+            <section className="wdata wind_speed"><FaWind size={25}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{weather?.wind?.speed}  m/s</section>
+            <section className="wdata feels_like"><FaTemperatureHigh size={25}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{weather?.main?.feels_like} &deg;C</section>
+            <section className="wdata humidity"><WiHumidity size={25}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{weather?.main?.humidity} %</section>
+            <section className="wdata preception"><FaTachometerAlt size={25}/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{weather?.main?.pressure} hPa</section>
           </div>
         </section>
       </div>
