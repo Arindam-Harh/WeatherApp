@@ -1,0 +1,71 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+:root {
+  --bg-dark: hsl(0, 0%, 0%);
+  --bg: hsl(0, 0%, 8%);
+  --bg-light: hsl(0, 0%, 15%);
+  --bg-hover: hsl(0, 0%, 20%);
+  --text: hsl(0, 0%, 95%);
+  --text-muted: hsl(0, 0%, 80%);
+  --border: hsl(0, 0%, 30%);
+  --img-border: rgba(0, 0, 0, 0.08);
+  --highlight: hsl(0, 0%, 60%);
+  --gradient-hover: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+  --gradient: linear-gradient(0deg, var(--bg), var(--bg-light));
+  --svg-color: hsl(0, 0%, 95%);
+  --text-active : hsl(0, 0%, 90%);
+  --outline-color: hsl(215, 94%, 51%);
+  --btn-gradient: linear-gradient(90deg,rgb(15, 11, 109) 0%, rgb(18, 18, 208) 35%, rgb(17, 194, 230) 100%);
+  --btn-hover: linear-gradient(to left, #0000cc 0%, #00ccff 100%);
+}
+
+body{
+    min-width: 100%;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 80%;
+    transform: translate(-50%, -50%);
+
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    z-index: 1000;
+}
+h1{
+    font-size: 3rem;
+    color: var(--text-active);
+}
+h2{
+    font-size: 2rem;
+    color: var(--text-muted);
+}
+.btn_modal{
+    color: var(--text-active);
+    font-size: 1.4rem;
+    font-weight: 500;
+    background: var(--btn-gradient);
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease-in;
+}
+
+.btn_modal:hover{
+    background: var(--btn-hover);
+    box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.15);
+}
