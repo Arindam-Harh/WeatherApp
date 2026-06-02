@@ -1,9 +1,20 @@
+import { useState } from "react";
+
 export const App = () => {
   // const API_KEY = `bfd3d0b5ded135b477ad7c473a4ae359`;
   // const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`;
 
   // const url = `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`;
-
+  const [city, setCity] = useState("");
+  const getCityName = (e) => {
+    e.preventDefault();
+    if(city.trim() === "") {
+      alert('Please Enter a Valid City Name.');
+      return;
+    }
+    console.log(city);
+    setCity("");
+  }
   return (
     <>
       <div className="main">
@@ -11,16 +22,17 @@ export const App = () => {
           <h1>Weather in Your City</h1>
         </header>
         <section className="body">
-          <div className="city_search">
-            <label htmlFor="city"></label>
+          <form onSubmit={getCityName} className="city_search">
             <input
               type="text"
               name="city"
               id="search"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
               placeholder="Search your city ... "
             />
-            <button className="btn_search">Search</button>
-          </div>
+            <button type="submit" className="btn_search">Search</button>
+          </form>
           <div className="temp">
             <h2 className="temperature">temperature</h2>
             <h2 className="city">City Name</h2>

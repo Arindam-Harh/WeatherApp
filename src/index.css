@@ -20,6 +20,8 @@
   --svg-color: hsl(0, 0%, 95%);
   --text-active : hsl(0, 0%, 90%);
   --outline-color: hsl(215, 94%, 51%);
+  --btn-gradient: linear-gradient(90deg,rgb(15, 11, 109) 0%, rgb(18, 18, 208) 35%, rgb(17, 194, 230) 100%);
+  --btn-hover: linear-gradient(to left, #0000cc 0%, #00ccff 100%);
 }
 
 .main{
@@ -70,16 +72,16 @@ h1{
     color: var(--text-active);
     font-size: 1.4rem;
     font-weight: 500;
-    background-color: var(--outline-color);
+    background: var(--btn-gradient);
     border-radius: 10px;
     padding: 10px 20px;
     cursor: pointer;
     border: none;
-    transition: all 0.3s linear;
+    transition: all 0.3s ease-in;
 }
 
 .btn_search:hover{
-    background-color: blue;
+    background: var(--btn-hover);
     box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 10px 20px rgba(0, 0, 0, 0.15);
