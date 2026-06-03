@@ -7,9 +7,9 @@
 
 :root {
   --bg-dark: hsl(0, 0%, 0%);
-  --bg: hsl(0, 0%, 8%);
+  --bg: hsl(0, 0%, 6%);
   --bg-light: hsl(0, 0%, 15%);
-  --bg-hover: hsl(0, 0%, 20%);
+  --bg-hover: hsl(0, 0%, 15%);
   --text: hsl(0, 0%, 95%);
   --text-muted: hsl(0, 0%, 80%);
   --border: hsl(0, 0%, 30%);
@@ -19,7 +19,7 @@
   --gradient: linear-gradient(0deg, var(--bg), var(--bg-light));
   --svg-color: hsl(0, 0%, 95%);
   --text-active: hsl(0, 0%, 90%);
-  --outline-color: hsl(215, 94%, 51%);
+  --outline-color: hsl(239, 87%, 33%);
   --btn-gradient: linear-gradient(
     90deg,
     rgb(15, 11, 109) 0%,
@@ -40,7 +40,13 @@ body {
   align-items: center;
   justify-content: start;
   flex-direction: column;
-  background-color: var(--bg);
+background: linear-gradient(
+  180deg,
+  #000000,
+  #0b1020,
+  #0a1a2f
+);
+background-attachment: fixed;
 }
 .h {
   margin-top: 1.5rem;
@@ -97,8 +103,8 @@ h1 {
   flex: 1;
 }
 #search:focus {
-  border-color: dodgerblue;
-  box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+  border-color: rgb(6, 71, 136);
+  box-shadow: 0 0 10px rgba(13, 119, 225, 0.5);
 }
 ::placeholder {
   color: var(--outline-color);
@@ -130,8 +136,8 @@ h2 {
   background-color: var(--bg-hover);
   padding: 15px 10px 25px 10px;
   box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 10px 20px rgba(0, 0, 0, 0.15);
+    0 4px 6px rgba(0, 0, 0, 0.4),
+    0 10px 20px rgba(0, 0, 0, 0.45);
   border-radius: 6px;
   border: 1px solid rgba(255, 250, 250, 0.332);
   display: grid;
@@ -189,17 +195,20 @@ h2 {
   justify-content: space-between;
   font-weight: 500;
   width: auto;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.7),
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   color: var(--text-active);
   padding: 1.25rem 0.75rem;
-  background-color: var(--bg-hover);
+  background: var(--bg-hover);
   /* border: 1px solid #1a29f982; */
 }
 
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
 
   display: flex;
   justify-content: center;
@@ -209,9 +218,19 @@ h2 {
 }
 .modal {
   margin: 1rem;
-  background: var(--bg-hover);
+  /* background: var(--bg-hover); */
+ background: linear-gradient(
+  180deg,
+  #000000,
+  #0b1020,
+  #0a1a2f
+);
   padding: 1.5rem;
   border-radius: 10px;
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.7),
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   z-index: 1000;
   text-align: center;
 }
@@ -266,7 +285,13 @@ h2 {
   border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px;
   border-radius: 12px;
-  background: #111;
+  background: var(--bg-hover);
+  background: linear-gradient(
+    180deg,
+    #0f172a,
+    #1e293b
+  );
+  
 }
 
 .wdata::before {
@@ -288,9 +313,18 @@ h2 {
 .temp {
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.7),
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   padding: 20px;
   border-radius: 12px;
-  background: #111;
+  background: var(--bg-hover);
+  background: linear-gradient(
+    180deg,
+    #0f172a,
+    #1e293b
+  );
 }
 
 .temp::before {
@@ -319,20 +353,20 @@ h2 {
 @keyframes neonPulse {
   0% {
     text-shadow:
-      0 0 5px #00cfff,
-      0 0 10px #00cfff,
-      0 0 20px #1e90ff,
-      0 0 30px #1e90ff,
-      0 0 40px #0a1a66;
+      0 0 5px #00d0ffb2,
+      0 0 10px #00d0ff88,
+      0 0 20px #1e8fff94,
+      0 0 30px #1e8fff8d,
+      0 0 40px #0a196699;
   }
 
   100% {
     text-shadow:
-      0 0 10px #00e5ff,
-      0 0 20px #00cfff,
-      0 0 40px #1e90ff,
-      0 0 60px #1e90ff,
-      0 0 80px #0a1a66;
+      0 0 10px #00e5ffb6,
+      0 0 20px #00d0ff9c,
+      0 0 40px #1e8fff91,
+      0 0 60px #1e8fffa3,
+      0 0 80px #0a196696;
   }
 }
 
@@ -344,22 +378,22 @@ h2 {
 @keyframes ultraGlow {
   from {
     text-shadow:
-      0 0 5px #00cfff,
-      0 0 15px #00cfff,
-      0 0 25px #1e90ff,
+      0 0 5px #00d0ff9c,
+      0 0 15px #00d0ff90,
+      0 0 25px #1e8fff88,
       0 0 35px #1e90ff,
-      0 0 50px #0a1a66,
-      0 0 70px #0a1a66;
+      0 0 50px #0a19668a,
+      0 0 70px #0a196669;
   }
 
   to {
     text-shadow:
-      0 0 10px #00e5ff,
-      0 0 25px #00e5ff,
-      0 0 45px #1e90ff,
-      0 0 70px #1e90ff,
-      0 0 100px #0a1a66,
-      0 0 120px #000;
+      0 0 10px #00e5ff9f,
+      0 0 25px #00e5ff80,
+      0 0 45px #1e8fff8a,
+      0 0 70px #1e8fff90,
+      0 0 100px #0a19668a,
+      0 0 120px #00000097;
   }
 }
 
@@ -410,7 +444,7 @@ h2 {
   }
 }
 
-.temperature {
+.temperature, .city {
   color: white;
   text-shadow:
     0 0 5px #00d0ff48,
