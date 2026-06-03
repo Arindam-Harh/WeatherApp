@@ -7,6 +7,8 @@ import { FaTachometerAlt } from "react-icons/fa";
 import { FaRegClock } from "react-icons/fa";
 import { CiCalendarDate } from "react-icons/ci";
 import { WiStrongWind } from "react-icons/wi";
+import { GiSunrise } from "react-icons/gi";
+import { GiSunset } from "react-icons/gi";
 import {
   WiDaySunny,
   WiCloud,
@@ -192,6 +194,14 @@ export const App = () => {
             <section className="wdata preception">
               <FaTachometerAlt size={25} /> &nbsp;&nbsp;&nbsp;
               {weather?.main?.pressure} hPa
+            </section>
+            <section className="wdata sunrise">
+              <GiSunrise size={25} /> &nbsp;&nbsp;&nbsp;
+              {new Date(weather?.sys?.sunrise * 1000).toLocaleTimeString()} 
+            </section>
+            <section className="wdata sunset">
+              <GiSunset size={25} /> &nbsp;&nbsp;&nbsp;
+              {new Date(weather?.sys?.sunset * 1000).toLocaleTimeString()} 
             </section>
           </div>
         </section>
