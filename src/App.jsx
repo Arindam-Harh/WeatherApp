@@ -15,10 +15,12 @@ import {
   WiTornado,
   WiDayCloudy,
 } from "react-icons/wi";
+import { WiStrongWind } from "react-icons/wi";
 import { Header } from "../components/Header.jsx";
 import { Input } from "../components/Input.jsx";
 import { MainWeather } from "../components/MainWeather.jsx";
 import { SecondaryWeather } from "../components/SecondaryWeather.jsx";
+import { Loading } from "../components/Loading.jsx";
 
 const weatherIconMap = {
   "clear sky": WiDaySunny,
@@ -78,9 +80,14 @@ export const App = () => {
   const [showModal, setShowModal] = useState(false);
   const [geoWeather, setGeoWeather] = useState([]);
   const [weather, setWeather] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const displayCity = async (city) => {
     try {
+      setLoading(true);
+
+      const startTime = Date.now();
+
       const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
 
       const geoRes = await fetch(geoUrl);
@@ -88,6 +95,7 @@ export const App = () => {
       console.log(geoData);
       if (geoData.length == 0) {
         setShowModal(true);
+        return;
       }
       const lat = geoData[0].lat;
       const lon = geoData[0].lon;
@@ -97,11 +105,24 @@ export const App = () => {
 
       const res = await fetch(weatherUrl);
       const info = await res.json();
+
       console.log(info);
       setWeather(info);
+
+       const elapsed = Date.now() - startTime;
+    const minLoadingTime = 1000;
+
+    if (elapsed < minLoadingTime) {
+      await new Promise(resolve =>
+        setTimeout(resolve, minLoadingTime - elapsed)
+      );
+    }
+
     } catch (error) {
       setShowModal(true);
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -122,7 +143,9 @@ export const App = () => {
     }
     displayCity(cityName);
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
       <div className="main">
