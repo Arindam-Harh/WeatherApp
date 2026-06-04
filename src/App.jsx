@@ -1,14 +1,5 @@
 import { useEffect, useState } from "react";
 import { Modal } from "../components/Modal.jsx";
-import { FaWind } from "react-icons/fa";
-import { WiHumidity } from "react-icons/wi";
-import { FaTemperatureHigh } from "react-icons/fa";
-import { FaTachometerAlt } from "react-icons/fa";
-import { FaRegClock } from "react-icons/fa";
-import { CiCalendarDate } from "react-icons/ci";
-import { WiStrongWind } from "react-icons/wi";
-import { GiSunrise } from "react-icons/gi";
-import { GiSunset } from "react-icons/gi";
 import {
   WiDaySunny,
   WiCloud,
@@ -26,6 +17,8 @@ import {
 } from "react-icons/wi";
 import { Header } from "../components/Header.jsx";
 import { Input } from "../components/Input.jsx";
+import { MainWeather } from "../components/MainWeather.jsx";
+import { SecondaryWeather } from "../components/SecondaryWeather.jsx";
 
 const weatherIconMap = {
   "clear sky": WiDaySunny,
@@ -82,7 +75,6 @@ const API_KEY = `bfd3d0b5ded135b477ad7c473a4ae359`;
 const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`;
 
 export const App = () => {
-  const [date, setDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [geoWeather, setGeoWeather] = useState([]);
   const [weather, setWeather] = useState(null);
@@ -117,19 +109,18 @@ export const App = () => {
     displayCity("Kolkata");
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
   const getIcon = (type) => {
     return weatherIconMap[type] || WiDaySunny;
   };
+
   const Icon = getIcon(weather?.weather[0]?.description);
+
   const handleCitySubmit = (cityName) => {
-    displayCity(cityName)
+    if (cityName.trim() === "") {
+      setShowModal(true);
+      return;
+    }
+    displayCity(cityName);
   };
 
   return (
@@ -144,46 +135,10 @@ export const App = () => {
           )}
 
           <Input onCitySubmit={handleCitySubmit} />
-          <div className="temp fade-in">
-            <h2 className="temperature fade-in">{weather?.main?.temp} °C</h2>
-            <h2 className="city">{geoWeather[0]?.name}</h2>
-            <h2 className="description">
-              {weather?.weather[0]?.description
-                .toLowerCase()
-                .split(" ")
-                .map((w) => w[0].toUpperCase() + w.slice(1))
-                .join(" ")}
-            </h2>
-            <h2 className="time">{date.toLocaleTimeString()}</h2>
-            <h2 className="wicon">{Icon && <Icon size={30} />}</h2>
-            <h2 className="date">{date.toLocaleDateString()}</h2>
-          </div>
-          <div className="weather_data fade-in">
-            <section className="wdata wind_speed">
-              <FaWind size={25} /> &nbsp;&nbsp;&nbsp;
-              {weather?.wind?.speed} m/s
-            </section>
-            <section className="wdata feels_like">
-              <FaTemperatureHigh size={25} /> &nbsp;&nbsp;
-              {weather?.main?.feels_like} &deg;C
-            </section>
-            <section className="wdata humidity">
-              <WiHumidity size={25} /> &nbsp;&nbsp;&nbsp;
-              {weather?.main?.humidity} %
-            </section>
-            <section className="wdata preception">
-              <FaTachometerAlt size={25} /> &nbsp;&nbsp;&nbsp;
-              {weather?.main?.pressure} hPa
-            </section>
-            <section className="wdata sunrise">
-              <GiSunrise size={25} /> &nbsp;&nbsp;&nbsp;
-              {new Date(weather?.sys?.sunrise * 1000).toLocaleTimeString()}
-            </section>
-            <section className="wdata sunset">
-              <GiSunset size={25} /> &nbsp;&nbsp;&nbsp;
-              {new Date(weather?.sys?.sunset * 1000).toLocaleTimeString()}
-            </section>
-          </div>
+
+          <MainWeather weather={weather} geoWeather={geoWeather} Icon={Icon} />
+
+          <SecondaryWeather weather={weather} />
         </section>
       </div>
     </>

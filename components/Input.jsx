@@ -1,13 +1,11 @@
 import { useState } from "react";
+import { Modal } from "./Modal";
 
 export const Input = ({ onCitySubmit }) => {
   const [city, setCity] = useState("");
 
   const getCityName = (e) => {
     e.preventDefault();
-    if (city.trim() === "") {
-      return;
-    }
     onCitySubmit(city);
     setCity("");
   };
