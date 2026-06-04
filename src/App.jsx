@@ -109,15 +109,14 @@ export const App = () => {
       console.log(info);
       setWeather(info);
 
-       const elapsed = Date.now() - startTime;
-    const minLoadingTime = 1000;
+      const elapsed = Date.now() - startTime;
+      const minLoadingTime = 1000;
 
-    if (elapsed < minLoadingTime) {
-      await new Promise(resolve =>
-        setTimeout(resolve, minLoadingTime - elapsed)
-      );
-    }
-
+      if (elapsed < minLoadingTime) {
+        await new Promise((resolve) =>
+          setTimeout(resolve, minLoadingTime - elapsed),
+        );
+      }
     } catch (error) {
       setShowModal(true);
       console.log(error);

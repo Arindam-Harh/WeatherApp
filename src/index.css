@@ -486,6 +486,7 @@ h2 {
 
 .loading-container {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -497,31 +498,57 @@ h2 {
     #0b1020,
     #0a1a2f
   );
+
+  overflow: hidden;
+  position: relative;
+}
+
+.loading-container::before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+
+  background: radial-gradient(
+    circle,
+    rgba(0, 207, 255, 0.25),
+    transparent 70%
+  );
+
+  filter: blur(40px);
+  animation: pulse 3s ease-in-out infinite;
 }
 
 .loader {
-  width: 70px;
-  height: 70px;
-
-  border: 5px solid rgba(255, 255, 255, 0.15);
-  border-top: 5px solid #38bdf8;
+  width: 90px;
+  height: 90px;
 
   border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.08);
+  border-top: 4px solid #00cfff;
 
   animation: spin 1s linear infinite;
 
   box-shadow:
-    0 0 10px rgba(56, 189, 248, 0.4),
-    0 0 25px rgba(37, 99, 235, 0.3);
+    0 0 15px rgba(0, 207, 255, 0.5),
+    0 0 30px rgba(30, 144, 255, 0.4),
+    0 0 50px rgba(10, 26, 102, 0.3);
 }
 
 .loading-text {
-  margin-top: 1.5rem;
-  color: white;
-  font-size: 1.4rem;
-  font-weight: 500;
+  margin-top: 2rem;
 
-  animation: glow 2s ease-in-out infinite alternate;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  animation: textGlow 1.5s ease-in-out infinite alternate;
+}
+
+.loading-text::after {
+  content: "";
+  animation: dots 1.5s infinite;
 }
 
 @keyframes spin {
@@ -534,16 +561,56 @@ h2 {
   }
 }
 
-@keyframes glow {
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+}
+
+@keyframes textGlow {
   from {
     text-shadow:
-      0 0 3px rgba(0, 207, 255, 0.3),
-      0 0 8px rgba(30, 144, 255, 0.2);
+      0 0 5px #00cfff,
+      0 0 10px #1e90ff;
   }
 
   to {
     text-shadow:
-      0 0 8px rgba(0, 207, 255, 0.6),
-      0 0 15px rgba(30, 144, 255, 0.4);
+      0 0 10px #00e5ff,
+      0 0 20px #1e90ff,
+      0 0 30px #0a1a66;
+  }
+}
+
+@keyframes dots {
+  0% {
+    content: "";
+  }
+
+  25% {
+    content: ".";
+  }
+
+  50% {
+    content: "..";
+  }
+
+  75% {
+    content: "...";
+  }
+
+  100% {
+    content: "";
   }
 }
