@@ -24,6 +24,8 @@ import {
   WiTornado,
   WiDayCloudy,
 } from "react-icons/wi";
+import { Header } from "../components/Header.jsx";
+import { Input } from "../components/Input.jsx";
 
 const weatherIconMap = {
   "clear sky": WiDaySunny,
@@ -81,7 +83,6 @@ const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`;
 
 export const App = () => {
   const [date, setDate] = useState(new Date());
-  const [city, setCity] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [geoWeather, setGeoWeather] = useState([]);
   const [weather, setWeather] = useState(null);
@@ -112,17 +113,6 @@ export const App = () => {
     }
   };
 
-  const getCityName = (e) => {
-    e.preventDefault();
-    if (city.trim() === "") {
-      // alert('Please Enter a Valid City Name.');
-      setShowModal(true);
-      return;
-    }
-    console.log(city);
-    displayCity(city);
-    setCity("");
-  };
   useEffect(() => {
     displayCity("Kolkata");
   }, []);
@@ -138,41 +128,31 @@ export const App = () => {
     return weatherIconMap[type] || WiDaySunny;
   };
   const Icon = getIcon(weather?.weather[0]?.description);
+  const handleCitySubmit = (cityName) => {
+    displayCity(cityName)
+  };
 
   return (
     <>
       <div className="main">
-        <header className="h">
-          <h1>Check Weather</h1>
-        </header>
+        <Header />
         <section className="body">
           {showModal && (
             <div className="overlay">
               <Modal onClose={() => setShowModal(false)} />
             </div>
           )}
-          <form onSubmit={getCityName} className="city_search">
-            <input
-              type="text"
-              name="city"
-              id="search"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="Search your city ... "
-            />
-            <button type="submit" className="btn_search">
-              Search
-            </button>
-          </form>
+
+          <Input onCitySubmit={handleCitySubmit} />
           <div className="temp fade-in">
             <h2 className="temperature fade-in">{weather?.main?.temp} °C</h2>
             <h2 className="city">{geoWeather[0]?.name}</h2>
             <h2 className="description">
               {weather?.weather[0]?.description
-                  .toLowerCase()
-                  .split(" ")
-                  .map((w) => w[0].toUpperCase() + w.slice(1))
-                  .join(" ")}
+                .toLowerCase()
+                .split(" ")
+                .map((w) => w[0].toUpperCase() + w.slice(1))
+                .join(" ")}
             </h2>
             <h2 className="time">{date.toLocaleTimeString()}</h2>
             <h2 className="wicon">{Icon && <Icon size={30} />}</h2>
@@ -188,7 +168,7 @@ export const App = () => {
               {weather?.main?.feels_like} &deg;C
             </section>
             <section className="wdata humidity">
-              <WiHumidity size={25}/> &nbsp;&nbsp;&nbsp;
+              <WiHumidity size={25} /> &nbsp;&nbsp;&nbsp;
               {weather?.main?.humidity} %
             </section>
             <section className="wdata preception">
@@ -197,11 +177,11 @@ export const App = () => {
             </section>
             <section className="wdata sunrise">
               <GiSunrise size={25} /> &nbsp;&nbsp;&nbsp;
-              {new Date(weather?.sys?.sunrise * 1000).toLocaleTimeString()} 
+              {new Date(weather?.sys?.sunrise * 1000).toLocaleTimeString()}
             </section>
             <section className="wdata sunset">
               <GiSunset size={25} /> &nbsp;&nbsp;&nbsp;
-              {new Date(weather?.sys?.sunset * 1000).toLocaleTimeString()} 
+              {new Date(weather?.sys?.sunset * 1000).toLocaleTimeString()}
             </section>
           </div>
         </section>
