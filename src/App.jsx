@@ -21,6 +21,7 @@ import { Input } from "../components/Input.jsx";
 import { MainWeather } from "../components/MainWeather.jsx";
 import { SecondaryWeather } from "../components/SecondaryWeather.jsx";
 import { Loading } from "../components/Loading.jsx";
+import { Forecast } from "../components/Forecast.jsx";
 
 const weatherIconMap = {
   "clear sky": WiDaySunny,
@@ -81,6 +82,7 @@ export const App = () => {
   const [geoWeather, setGeoWeather] = useState([]);
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [forecast, setForecast] = useState([]);
 
   const displayCity = async (city) => {
     try {
@@ -108,6 +110,15 @@ export const App = () => {
 
       console.log(info);
       setWeather(info);
+
+      const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+      const forecastRes = await fetch(forecastUrl);
+      const forecastData = await forecastRes.json();
+      const dailyForecast = forecastData.list.filter((item) =>
+        item.dt_txt.includes("12:00:00"),
+      );
+      setForecast(dailyForecast);
 
       const elapsed = Date.now() - startTime;
       const minLoadingTime = 1000;
@@ -161,6 +172,7 @@ export const App = () => {
           <MainWeather weather={weather} geoWeather={geoWeather} Icon={Icon} />
 
           <SecondaryWeather weather={weather} />
+          <Forecast forecast={forecast} getIcon={getIcon} />
         </section>
       </div>
     </>

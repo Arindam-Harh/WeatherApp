@@ -614,3 +614,178 @@ h2 {
     content: "";
   }
 }
+
+.forecast-container {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.forecast-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: white;
+
+  text-shadow:
+    0 0 5px #00cfff,
+    0 0 10px #1e90ff;
+}
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+}
+
+.forecast-card {
+  background: linear-gradient(
+    180deg,
+    #121826,
+    #1b2438
+  );
+
+  border: 1px solid rgba(0, 207, 255, 0.2);
+
+  border-radius: 12px;
+
+  padding: 1rem;
+
+  text-align: center;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.4),
+    0 0 12px rgba(0, 207, 255, 0.08);
+
+  transition: all 0.3s ease;
+}
+
+.forecast-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 207, 255, 0.25);
+}
+
+.forecast-card h3 {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.forecast-date {
+  color: #9fb3c8;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.forecast-temp {
+  color: #00d9ff;
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  text-shadow:
+    0 0 5px rgba(0, 217, 255, 0.5),
+    0 0 10px rgba(0, 217, 255, 0.3);
+}
+.forecast-icon {
+    font-size: 4rem;
+    color: #00d9ff;
+
+    filter:
+        drop-shadow(0 0 5px rgba(0, 217, 255, 0.5))
+        drop-shadow(0 0 15px rgba(0, 217, 255, 0.3));
+
+    margin-bottom: 0.5rem;
+}
+
+.forecast-day {
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.forecast-weather {
+    color: #d6e4f4;
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    margin: 0.5rem 0;
+}
+
+.forecast-extra {
+    margin-top: 0.75rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    color: #9fb3c8;
+    font-size: 0.9rem;
+}
+
+.wdata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.75rem;
+  text-align: center;
+
+  min-height: 150px;
+}
+
+.metric-title {
+  color: #b8c7d9;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.metric-icon {
+  font-size: 2.8rem;
+  color: #00d9ff;
+
+  filter:
+    drop-shadow(0 0 5px rgba(0, 217, 255, 0.5))
+    drop-shadow(0 0 15px rgba(0, 217, 255, 0.3));
+
+  transition: transform 0.3s ease;
+}
+
+.wdata:hover .metric-icon {
+  transform: scale(1.1);
+}
+
+.metric-value {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  text-shadow:
+    0 0 5px rgba(0, 207, 255, 0.3);
+}
+.metric-title {
+  color: #b8c7d9;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.metric-icon {
+  font-size: 2rem;
+  color: #00d9ff;
+
+  filter:
+    drop-shadow(0 0 5px rgba(0, 217, 255, 0.5))
+    drop-shadow(0 0 15px rgba(0, 217, 255, 0.3));
+
+  transition: transform 0.3s ease;
+}
+
+.metric-value {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 600;
+
+  text-shadow:
+    0 0 5px rgba(0, 207, 255, 0.3);
+}
