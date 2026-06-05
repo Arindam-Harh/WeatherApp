@@ -1,12 +1,18 @@
-export const Forecast = ({ forecast, getIcon }) => {
+import { WiHumidity, WiStrongWind } from "react-icons/wi";
+
+export const ForecastModal = ({ forecast, getIcon, onClose }) => {
   return (
-    <div className="forecast-container">
+    <div className="forecast-modal">
+      {/* Fixed Close Button */}
+      <button className="forecast-close-btn" onClick={onClose}>
+        ✕
+      </button>
+
       <h2 className="forecast-title">5-Day Forecast</h2>
 
       <div className="forecast-grid">
         {forecast.map((day) => {
           const date = new Date(day.dt_txt);
-
           const Icon = getIcon(day.weather[0].description);
 
           return (
@@ -19,26 +25,31 @@ export const Forecast = ({ forecast, getIcon }) => {
                 })}
               </h3>
 
-              <p className="forecast-date">
-                {date.toLocaleDateString()}
-              </p>
+              <p className="forecast-date">{date.toLocaleDateString()}</p>
 
-              <p className="forecast-weather">
-                {day.weather[0].description}
-              </p>
+              <p className="forecast-weather">{day.weather[0].description}</p>
 
-              <p className="forecast-temp">
-                {Math.round(day.main.temp)}&deg;C
-              </p>
-
+              <p className="forecast-temp">{Math.round(day.main.temp)}°C</p>
               <div className="forecast-extra">
-                <span>💧 {day.main.humidity}%</span>
-                <span>💨 {Math.round(day.wind.speed)} m/s</span>
+                <span>
+                  <WiHumidity />
+                  {day.main.humidity}%
+                </span>
+
+                <span>
+                  <WiStrongWind />
+                  {Math.round(day.wind.speed)} m/s
+                </span>
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* Bottom Close Button */}
+      <button className="btn_modal forecast-bottom-close" onClick={onClose}>
+        Close
+      </button>
     </div>
   );
 };
