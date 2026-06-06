@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import rainSound from "./assets/rain.mp3";
 import { Modal } from "../components/Modal.jsx";
 import {
   WiDaySunny,
@@ -86,6 +87,24 @@ export const App = () => {
   const [forecast, setForecast] = useState([]);
   const [showForecast, setShowForecast] = useState(false);
 
+  useEffect(() => {
+    const rainAudio = new Audio(rainSound);
+
+    rainAudio.loop = true;
+    rainAudio.volume = 0.3;
+
+    if (
+      weather?.weather?.[0]?.main === "Rain" ||
+      weather?.weather?.[0]?.main === "Drizzle"
+    ) {
+      rainAudio.play().catch(() => {});
+    }
+
+    return () => {
+      rainAudio.pause();
+      rainAudio.currentTime = 0;
+    };
+  }, [weather]);
   const displayCity = async (city) => {
     try {
       setLoading(true);
