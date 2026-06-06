@@ -24,6 +24,9 @@ import { MainWeather } from "../components/MainWeather.jsx";
 import { SecondaryWeather } from "../components/SecondaryWeather.jsx";
 import { Loading } from "../components/Loading.jsx";
 import { ForecastModal } from "../components/Forecast.jsx";
+import birdSound from "./assets/birds.mp3";
+import thunderSound from "./assets/thunder.mp3";
+import windSound from "./assets/wind.mp3";
 
 const weatherIconMap = {
   "clear sky": WiDaySunny,
@@ -88,23 +91,34 @@ export const App = () => {
   const [showForecast, setShowForecast] = useState(false);
 
   useEffect(() => {
-    const rainAudio = new Audio(rainSound);
+    let audio;
 
-    rainAudio.loop = true;
-    rainAudio.volume = 0.3;
+    const weatherType = weather?.weather?.[0]?.main;
 
-    if (
-      weather?.weather?.[0]?.main === "Rain" ||
-      weather?.weather?.[0]?.main === "Drizzle"
-    ) {
-      rainAudio.play().catch(() => {});
+    if (weatherType === "Rain" || weatherType === "Drizzle") {
+      audio = new Audio(rainSound);
+    } else if (weatherType === "Clear") {
+      audio = new Audio(birdSound);
+    } else if (weatherType === "Thunderstorm") {
+      audio = new Audio(thunderSound);
+    } else if (weatherType === "Clouds") {
+      audio = new Audio(windSound);
+    }
+
+    if (audio) {
+      audio.loop = true;
+      audio.volume = 0.8;
+      audio.play().catch(() => {});
     }
 
     return () => {
-      rainAudio.pause();
-      rainAudio.currentTime = 0;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
     };
   }, [weather]);
+
   const displayCity = async (city) => {
     try {
       setLoading(true);
