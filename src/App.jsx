@@ -107,7 +107,7 @@ export const App = () => {
 
     if (audio) {
       audio.loop = true;
-      audio.volume = 0.8;
+      audio.volume = 0.4;
       audio.play().catch(() => {});
     }
 
