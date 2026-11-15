@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import rainSound from "./assets/rain.mp3";
 import { Modal } from "../components/Modal.jsx";
 import {
   WiDaySunny,
@@ -15,18 +14,15 @@ import {
   WiSleet,
   WiTornado,
   WiDayCloudy,
+  WiStrongWind,
 } from "react-icons/wi";
 import { FaCalendarAlt } from "react-icons/fa";
-import { WiStrongWind } from "react-icons/wi";
 import { Header } from "../components/Header.jsx";
 import { Input } from "../components/Input.jsx";
 import { MainWeather } from "../components/MainWeather.jsx";
 import { SecondaryWeather } from "../components/SecondaryWeather.jsx";
 import { Loading } from "../components/Loading.jsx";
 import { ForecastModal } from "../components/Forecast.jsx";
-import birdSound from "./assets/birds.mp3";
-import thunderSound from "./assets/thunder.mp3";
-import windSound from "./assets/wind.mp3";
 
 const weatherIconMap = {
   "clear sky": WiDaySunny,
@@ -79,8 +75,8 @@ const weatherIconMap = {
   "shower snow": WiSnow,
   "heavy shower snow": WiSnow,
 };
+
 const API_KEY = `bfd3d0b5ded135b477ad7c473a4ae359`;
-const BASE_URL = `https://api.openweathermap.org/data/2.5/weather`;
 
 export const App = () => {
   const [showModal, setShowModal] = useState(false);
@@ -89,35 +85,6 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [forecast, setForecast] = useState([]);
   const [showForecast, setShowForecast] = useState(false);
-
-  useEffect(() => {
-    let audio;
-
-    const weatherType = weather?.weather?.[0]?.main;
-
-    if (weatherType === "Rain" || weatherType === "Drizzle") {
-      audio = new Audio(rainSound);
-    } else if (weatherType === "Clear") {
-      audio = new Audio(birdSound);
-    } else if (weatherType === "Thunderstorm") {
-      audio = new Audio(thunderSound);
-    } else if (weatherType === "Clouds") {
-      audio = new Audio(windSound);
-    }
-
-    if (audio) {
-      audio.loop = true;
-      audio.volume = 0.4;
-      audio.play().catch(() => {});
-    }
-
-    return () => {
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    };
-  }, [weather]);
 
   const displayCity = async (city) => {
     try {
@@ -188,9 +155,11 @@ export const App = () => {
     }
     displayCity(cityName);
   };
+
   if (loading) {
     return <Loading />;
   }
+
   return (
     <>
       <div className="main">
